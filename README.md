@@ -108,8 +108,13 @@ Not in any particular order:
 These are the things that are not issues but still need
 to be done.
 
-* I need to write a `Makefile` so it is easy to compile this
-  thing.
-* Write the Changelog, add licenses and that kind of things.
+* Add licenses and that kind of things.
 * Write the documentation for the generators.
 * Write a little add-up for generating distributions.
+
+###### DONE LIST
+Just that, the done list.
+
+* Changelog Started.
+* Makefile done. Although you still need to use the
+  resulting object as source for your program.

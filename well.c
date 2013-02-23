@@ -39,12 +39,12 @@ unsigned int well_rand()
 }
 
 #if RANDS_USE_STATES
-void inline well_init_st(well_state **st)
+inline void well_init_st(well_state **st)
 {
     (*st)=malloc(sizeof(well_state)); 
 }
 
-void inline well_clear_st(well_state *st)
+inline void well_clear_st(well_state *st)
 {
     free(st);
 }

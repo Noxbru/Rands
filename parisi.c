@@ -29,12 +29,12 @@ unsigned int pr_rand()
 }
 
 #if RANDS_USE_STATES
-void inline pr_init_st(pr_state **st)
+inline void pr_init_st(pr_state **st)
 {
     (*st)=malloc(sizeof(pr_state)); 
 }
 
-void inline pr_clear_st(pr_state *st)
+inline void pr_clear_st(pr_state *st)
 {
     free(st);
 }
