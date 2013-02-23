@@ -1,3 +1,8 @@
+/* The code for generating random numbers is taken
+ * from the paper 'Random Number Generation' by
+ * Chris Lomont. It is released in the public
+ * domain, but he'd appreciate a reference, so
+ * here it is (^_^)                                 */
 #include <stdlib.h>
 #include "rands.h"
 

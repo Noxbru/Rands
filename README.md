@@ -104,7 +104,7 @@ Not in any particular order:
   option to choose between them.
 * Things that I am sure I have forgotten =)
 
-## TODO LIST
+###### TODO LIST
 These are the things that are not issues but still need
 to be done.
 
