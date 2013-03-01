@@ -1,8 +1,11 @@
-/* The code for generating random numbers is taken
- * from the paper 'Random Number Generation' by
- * Chris Lomont. It is released in the public
- * domain, but he'd appreciate a reference, so
- * here it is (^_^)                                 */
+/* This code has been inspired by the one at the
+ * paper 'Random Number Generation' by Chris Lomont
+ * with some changes I have done after I have
+ * discovered how the algorithm works.
+ * 
+ * Also, his code is released in the public domain,
+ * but he'd appreciate a reference, so here it is
+ * (^_^)                                            */
 
 /* Here is the explanation of the algorithm as I have
  * managed to understand. This corresponds to
@@ -23,15 +26,15 @@
  * b = state[ind+13]
  * c = state[ind+9]
  * 
- * a = a^(a<<16)^b^(b<<15)      (z1)
+ * b = a^(a<<16)^b^(b<<15)      (z1)
  * c = c^(c>>11)                (z2)
- * d = a^c                      (z3)
+ * d = b^c                      (z3)
  * 
  * state[ind] = d
  * ind = ind - 1
- * b = state[ind]               (z0)
+ * a = state[ind]               (z0)
  * 
- * state[ind] = b^(b^<<2)^a^(a<<18)^(c<<28)^d^((d<<5)&0xda442d24UL)
+ * state[ind] = a^(a^<<2)^b^(b<<18)^(c<<28)^d^((d<<5)&0xda442d24UL)
  * 
  * return state[ind]
  * ----------------------------------------------------------------
@@ -71,16 +74,18 @@ unsigned int well_rand()
 {
     unsigned int a,b,c,d;
     a=well_default_state.wheel[well_default_state.index];
-    c=well_default_state.wheel[(well_default_state.index+13)&15];
-    b=a^c^(a<<16)^(c<<15);
+    b=well_default_state.wheel[(well_default_state.index+13)&15];
     c=well_default_state.wheel[(well_default_state.index+9)&15];
+
+    b=a^(a<<16)^b^(b<<15);
     c^=(c>>11);
 
-    a=well_default_state.wheel[well_default_state.index]=b^c;
-    d=a^((a<<5)&0xDA442D24UL);
+    well_default_state.wheel[well_default_state.index]=d=b^c;
     well_default_state.index=(well_default_state.index+15)&15;
     a=well_default_state.wheel[well_default_state.index];
-    well_default_state.wheel[well_default_state.index]=a^b^d^(a<<2)^(b<<18)^(c<<28);
+
+    d=d^((d<<5)&0xDA442D24UL);
+    well_default_state.wheel[well_default_state.index]=a^(a<<2)^b^(b<<18)^(c<<28)^d;
     return well_default_state.wheel[well_default_state.index];
 }
 
@@ -110,16 +115,18 @@ unsigned int well_rand_st(well_state *st)
 {
     unsigned int a,b,c,d;
     a=st->wheel[st->index];
-    c=st->wheel[(st->index+13)&15];
-    b=a^c^(a<<16)^(c<<15);
+    b=st->wheel[(st->index+13)&15];
     c=st->wheel[(st->index+9)&15];
+
+    b=a^(a<<16)^b^(b<<15);
     c^=(c>>11);
 
-    a=st->wheel[st->index]=b^c;
-    d=a^((a<<5)&0xDA442D24UL);
+    st->wheel[st->index]=d=b^c;
     st->index=(st->index+15)&15;
     a=st->wheel[st->index];
-    st->wheel[st->index]=a^b^d^(a<<2)^(b<<18)^(c<<28);
+
+    d=d^((d<<5)&0xDA442D24UL);
+    st->wheel[st->index]=a^(a<<2)^b^(b<<18)^(c<<28)^d;
     return st->wheel[st->index];
 }
 #endif
