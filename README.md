@@ -14,6 +14,28 @@ So far, it only has two generators, but this will change with
 time (and with the ones I think are more interesting) But
 if you want to contribute to the code, just send them (^\_^)
 
+## Generators
+
+This library aims to have some interesting generators. Maybe
+they are not interesting for everybody, but as this thing will
+grow, surely you can find something.
+
+Here I will write something about the generators that are
+implemented. For more information, in their source files
+there will be (I hope) more information about how they work.
+
+* Parisi-Rapuano
+    * Type: Lagged Fibonacci Generator
+    * Period: Unknown (although should be near to (2⁵⁵-1)·32)
+* Well
+    * Type: Twisted Generalised Feedback Shift Register
+    * Period: 2⁵¹²-1
+
+Note: For a little perspective, my biggest simulation has been
+the Ising model (which is fairly little although bigger than
+most typical uses) And I needed only
+`50·8·200000·(8²+16²+24²+32²) = 153.6·10⁹ ≈ 2³⁷` random numbers.
+
 ## Usage
 
 This library aims to be as easy as possible to use, so there
