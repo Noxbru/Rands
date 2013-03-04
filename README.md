@@ -138,5 +138,4 @@ to be done.
 Just that, the done list.
 
 * Changelog Started.
-* Makefile done. Although you still need to use the
-  resulting object as source for your program.
+* Makefile done.
