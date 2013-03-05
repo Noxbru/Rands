@@ -30,6 +30,9 @@ there will be (I hope) more information about how they work.
 * Well
     * Type: Twisted Generalised Feedback Shift Register
     * Period: 2⁵¹²-1
+* Well\_x64
+    * Type: Twisted Generalised Feedback Shift Register
+    * Period: 2⁵¹²-1
 
 Note: For a little perspective, my biggest simulation has been
 the Ising model (which is fairly little although bigger than

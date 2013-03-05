@@ -50,4 +50,26 @@ unsigned int well_rand_st(well_state *st);
 
 #endif // WELL_RAND
 
+#if WELL_X64_RAND || RANDS_USE_ALL
+
+typedef struct _well_x64_state 
+{
+    unsigned long wheel[16];
+    unsigned char index;
+} well_x64_state;
+
+extern well_x64_state well_x64_default_state;
+
+void well_x64_srand(unsigned long seed);
+unsigned int well_x64_rand();
+
+#if RANDS_USE_STATES
+void well_x64_init_st(well_x64_state **st);
+void well_x64_clear_st(well_x64_state *st);
+void well_x64_srand_st(well_x64_state *st, unsigned long seed);
+unsigned int well_x64_rand_st(well_x64_state *st);
+#endif
+
+#endif // WELL_X64_RAND
+
 #endif

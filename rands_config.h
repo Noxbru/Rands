@@ -2,8 +2,9 @@
 
 #if !RANDS_USE_ALL
 
-#define PR_RAND 1
-#define WELL_RAND 1
+#define PR_RAND         1
+#define WELL_RAND       1
+#define WELL_X64_RAND   1
 
 #endif
 

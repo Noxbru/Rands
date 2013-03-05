@@ -1,3 +1,11 @@
+2013-03-05
+----------
+
+Added the 64-bits implementation of the
+WELL generator. Although it still needs
+to have information in its source code.
+
+
 2013-03-04
 ----------
 
