@@ -8,10 +8,14 @@ well_x64_state well_x64_default_state;
 void well_x64_srand(unsigned long seed)
 {
     unsigned char i;
+    unsigned long int r;
 
     srand(seed);
     for(i = 0; i < 16; i++)
-        well_x64_default_state.wheel[i]=rand();
+    {
+        r=rand();
+        well_x64_default_state.wheel[i]=(r<<32)+rand();
+    }
 
     well_x64_default_state.index=0;
 }
@@ -49,10 +53,14 @@ inline void well_x64_clear_st(well_x64_state *st)
 void well_x64_srand_st(well_x64_state *st, unsigned long seed)
 {
     unsigned char i;
+    unsigned long int r
 
     srand(seed);
     for(i = 0; i < 16; i++)
-        st->wheel[i]=rand();
+    {
+        r=rand();
+        st->wheel[i]=(r<<32)+rand();
+    }
 
     st->index=0;
 }
