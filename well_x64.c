@@ -53,7 +53,7 @@ inline void well_x64_clear_st(well_x64_state *st)
 void well_x64_srand_st(well_x64_state *st, unsigned long seed)
 {
     unsigned char i;
-    unsigned long int r
+    unsigned long int r;
 
     srand(seed);
     for(i = 0; i < 16; i++)
