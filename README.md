@@ -24,6 +24,9 @@ Here I will write something about the generators that are
 implemented. For more information, in their source files
 there will be (I hope) more information about how they work.
 
+* Isaac
+    * Type: ¿?
+    * Period: ¿?
 * Parisi-Rapuano
     * Type: Lagged Fibonacci Generator
     * Period: Unknown (although should be near to (2⁵⁵-1)·32)
