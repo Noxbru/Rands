@@ -1,3 +1,18 @@
+/* Little notes until I write the full
+ * documentation:
+ *
+ * Sensitive to seeding values:
+ * if the states from 251 to 256 are
+ * 0, then the output will be always 0,
+ * the rest of the values of the
+ * state doesn't matter.
+ * if there is just one 1 in those
+ * numbers, for example wheel[255]
+ * is 1, then it takes 1000 random
+ * numbers to reach a popcount of
+ * 4096 (256*16)
+ */
+
 #include <stdlib.h>
 #include "rands.h"
 

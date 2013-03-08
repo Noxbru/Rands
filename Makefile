@@ -21,9 +21,7 @@ parisi.o: parisi.c
 well.o: well.c
 well_x64.o: well_x64.c
 
-speed-test:
-	make all
-	make speed.o
+speed-test: rands speed.o
 	$(CC) $(CFLAGS) speed.o -o speed $(LDFLAGS) -lrands -L.
 	./speed
 
