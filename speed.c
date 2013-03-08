@@ -21,7 +21,6 @@ void calc_mean_var(double *mean, double *var, unsigned long int *data)
 
 int main(int argc, const char *argv[])
 {
-
     unsigned int i,j;
     unsigned long int elapsed_time;
     unsigned long int times[10];
@@ -33,13 +32,30 @@ int main(int argc, const char *argv[])
     printf("|    Speed tests for the generators    |\n");
     printf("#======================================#\n");
     printf("#======================================#\n");
-    printf("| The tests consists in generating     |\n");
-    printf("| measuring the time it takes to each  |\n");
-    printf("| generator to generate 10 million     |\n");
-    printf("| random numbers                       |\n");
+    printf("| The tests consists in measuring the  |\n");
+    printf("| time it takes to each generator to   |\n");
+    printf("| generate 10 million random numbers   |\n");
+    printf("|                                      |\n");
     printf("+--------------------------------------+\n");
     printf("| 32 Bits                              |\n");
     printf("+--------------------------------------+\n");
+
+#if ISAAC_RAND || RANDS_USE_ALL
+    isaac_srand(time(NULL));
+    for(j = 0; j < 10; j++)
+    {
+        clock_gettime(CLOCK_MONOTONIC,&tp1);
+        for(i = 0; i < 10000000; i++)
+            isaac_rand();
+        clock_gettime(CLOCK_MONOTONIC,&tp2);
+        elapsed_time = (unsigned long) (tp2.tv_sec-tp1.tv_sec)*1000000000 + \
+                       (unsigned long) tp2.tv_nsec-tp1.tv_nsec;
+        times[j] = elapsed_time;
+    }
+    calc_mean_var(&mean,&var,times);
+
+    printf("| ISAAC:               %.4lf ± %.4lf |\n",mean/1e9, sqrt(var)/1e9);
+#endif
 
 #if PR_RAND || RANDS_USE_ALL
     pr_srand(time(NULL));
@@ -98,6 +114,23 @@ int main(int argc, const char *argv[])
     printf("+--------------------------------------+\n");
     printf("| 64 Bits                              |\n");
     printf("+--------------------------------------+\n");
+
+#if ISAAC_RAND || RANDS_USE_ALL
+    isaac_srand(time(NULL));
+    for(j = 0; j < 10; j++)
+    {
+        clock_gettime(CLOCK_MONOTONIC,&tp1);
+        for(i = 0; i < 10000000; i++)
+            isaac_rand();
+        clock_gettime(CLOCK_MONOTONIC,&tp2);
+        elapsed_time = (unsigned long) (tp2.tv_sec-tp1.tv_sec)*1000000000 + \
+                       (unsigned long) tp2.tv_nsec-tp1.tv_nsec;
+        times[j] = elapsed_time;
+    }
+    calc_mean_var(&mean,&var,times);
+
+    printf("| ISAAC:               %.4lf ± %.4lf |\n",mean/1e9, sqrt(var)/1e9);
+#endif
 
 #if PR_RAND || RANDS_USE_ALL
     pr_srand(time(NULL));
