@@ -24,7 +24,7 @@ void isaac_srand(unsigned long int seed);
 void isaac_calc();
 #define isaac_rand()                                                                        \
     (isaac_default_state.index ? isaac_default_state.wheel2[isaac_default_state.index++] :  \
-                                 isaac_calc(),isaac_default_state.wheel2[isaac_default_state.index++])
+                                (isaac_calc(),isaac_default_state.wheel2[isaac_default_state.index++]))
 
 #if RANDS_USE_STATES
 void isaac_init_st(isaac_state **st);
@@ -33,7 +33,7 @@ void isaac_srand_st(isaac_state *st, unsigned long int seed);
 void isaac_calc_st(isaac_state *st);
 #define isaac_rand_st(st)                                   \
     (st->index ? st->wheel2[st->index++] :                  \
-                 isaac_calc_st(st),st->wheel2[st->index++])
+                (isaac_calc_st(st),st->wheel2[st->index++]))
 #endif
 
 #endif // ISAAC_RAND
