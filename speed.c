@@ -120,7 +120,7 @@ int main(int argc, const char *argv[])
     for(j = 0; j < 10; j++)
     {
         clock_gettime(CLOCK_MONOTONIC,&tp1);
-        for(i = 0; i < 10000000; i++)
+        for(i = 0; i < 20000000; i++)
             isaac_rand();
         clock_gettime(CLOCK_MONOTONIC,&tp2);
         elapsed_time = (unsigned long) (tp2.tv_sec-tp1.tv_sec)*1000000000 + \
