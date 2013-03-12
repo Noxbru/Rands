@@ -6,6 +6,7 @@ LDFLAGS = -lm -lrt
 CFLAGS += $(ERROR_FLAGS)
 
 OBJ_RANDS = isaac.o	   \
+			isaac_x64.o\
 			parisi.o   \
 			well.o     \
 			well_x64.o
@@ -19,6 +20,7 @@ rands: $(OBJ_RANDS)
 		ar rcs $(LIB_RANDS_FINAL) $(OBJ_RANDS)
 
 isaac.o: isaac.c
+isaac_x64.o: isaac_x64.c
 parisi.o: parisi.c
 well.o: well.c
 well_x64.o: well_x64.c

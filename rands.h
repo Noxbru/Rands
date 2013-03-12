@@ -38,6 +38,38 @@ void isaac_calc_st(isaac_state *st);
 
 #endif // ISAAC_RAND
 
+#if ISAAC_X64_RAND || RANDS_USE_ALL
+
+typedef struct _isaac_x64_state
+{
+    unsigned long int wheel[256];
+    unsigned long int wheel2[256];
+    unsigned long int a, b;
+    unsigned char c;
+
+    unsigned char index;
+} isaac_x64_state;
+
+extern isaac_x64_state isaac_x64_default_state;
+
+void isaac_x64_srand(unsigned long int seed);
+void isaac_x64_calc();
+#define isaac_x64_rand()                                                                        \
+    (isaac_x64_default_state.index ? isaac_x64_default_state.wheel2[isaac_x64_default_state.index++] :  \
+                                    (isaac_x64_calc(),isaac_x64_default_state.wheel2[isaac_x64_default_state.index++]))
+
+#if RANDS_USE_STATES
+void isaac_x64_init_st(isaac_x64_state **st);
+void isaac_x64_clear_st(isaac_x64_state *st);
+void isaac_x64_srand_st(isaac_x64_state *st, unsigned long int seed);
+void isaac_x64_calc_st(isaac_x64_state *st);
+#define isaac_x64_rand_st(st)                                   \
+    (st->index ? st->wheel2[st->index++] :                  \
+                (isaac_x64_calc_st(st),st->wheel2[st->index++]))
+#endif
+
+#endif // ISAAC_X64_RAND
+
 #if PR_RAND || RANDS_USE_ALL
 
 typedef struct _pr_state

@@ -57,6 +57,23 @@ int main(int argc, const char *argv[])
     printf("| ISAAC:               %.4lf ± %.4lf |\n",mean/1e9, sqrt(var)/1e9);
 #endif
 
+#if ISAAC_X64_RAND || RANDS_USE_ALL
+    isaac_srand(time(NULL));
+    for(j = 0; j < 10; j++)
+    {
+        clock_gettime(CLOCK_MONOTONIC,&tp1);
+        for(i = 0; i < 5000000; i++)
+            isaac_x64_rand();
+        clock_gettime(CLOCK_MONOTONIC,&tp2);
+        elapsed_time = (unsigned long) (tp2.tv_sec-tp1.tv_sec)*1000000000 + \
+                       (unsigned long) tp2.tv_nsec-tp1.tv_nsec;
+        times[j] = elapsed_time;
+    }
+    calc_mean_var(&mean,&var,times);
+
+    printf("| ISAAC (64bits):      %.4lf ± %.4lf |\n",mean/1e9, sqrt(var)/1e9);
+#endif
+
 #if PR_RAND || RANDS_USE_ALL
     pr_srand(time(NULL));
     for(j = 0; j < 10; j++)
@@ -130,6 +147,23 @@ int main(int argc, const char *argv[])
     calc_mean_var(&mean,&var,times);
 
     printf("| ISAAC:               %.4lf ± %.4lf |\n",mean/1e9, sqrt(var)/1e9);
+#endif
+
+#if ISAAC_X64_RAND || RANDS_USE_ALL
+    isaac_srand(time(NULL));
+    for(j = 0; j < 10; j++)
+    {
+        clock_gettime(CLOCK_MONOTONIC,&tp1);
+        for(i = 0; i < 10000000; i++)
+            isaac_x64_rand();
+        clock_gettime(CLOCK_MONOTONIC,&tp2);
+        elapsed_time = (unsigned long) (tp2.tv_sec-tp1.tv_sec)*1000000000 + \
+                       (unsigned long) tp2.tv_nsec-tp1.tv_nsec;
+        times[j] = elapsed_time;
+    }
+    calc_mean_var(&mean,&var,times);
+
+    printf("| ISAAC (64bits):      %.4lf ± %.4lf |\n",mean/1e9, sqrt(var)/1e9);
 #endif
 
 #if PR_RAND || RANDS_USE_ALL

@@ -27,6 +27,9 @@ there will be (I hope) more information about how they work.
 * Isaac
     * Type: ¿?
     * Period: ¿?
+* Isaac\_x64
+    * Type: ¿?
+    * Period: ¿?
 * Parisi-Rapuano
     * Type: Lagged Fibonacci Generator
     * Period: Unknown (although should be near to (2⁵⁵-1)·32)
