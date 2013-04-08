@@ -3,3 +3,7 @@
 
 # Libraries
 *.a
+
+# tags stuff
+tags
+types_c.taghl
