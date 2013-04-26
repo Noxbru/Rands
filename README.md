@@ -106,9 +106,9 @@ choose if you want to have all the generators, and if not
 which ones to have. And you can also choose whether you
 want to be able to use states or not.
 
-## Issues and TODO list
+## Issues list
 Here I will write down all the things of the library I think
-are issues and need to be repaired (hence the name TODO list).
+are issues and need to be repaired, or at least noticed.
 Some of them, I really don't know how to correct them so they
 will be here for a looooong time, sorry about that. Although 
 I will provide solutions to some of them, you will have to
@@ -135,16 +135,4 @@ Not in any particular order:
   option to choose between them.
 * Things that I am sure I have forgotten =)
 
-###### TODO LIST
-These are the things that are not issues but still need
-to be done.
-
-* Add licenses and that kind of things.
-* Write the documentation for the generators.
-* Write a little add-up for generating distributions.
-
-###### DONE LIST
-Just that, the done list.
-
-* Changelog Started.
-* Makefile done.
+The TODO list has been separated in its own file for clarity
