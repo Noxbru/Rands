@@ -10,7 +10,7 @@ based on states, so you can have more than one sources of
 random numbers. This is interesting if you are doing parallel
 computations and need a thread-safe way to produce numbers.
 
-So far, it only has two generators, but this will change with
+So far, it only has three generators, but this will change with
 time (and with the ones I think are more interesting) But
 if you want to contribute to the code, just send them (^\_^)
 
