@@ -1,3 +1,13 @@
+2013-04-26
+----------
+
+Separated the TODO list from the README.
+
+Done some experiments about changing the pr_rand() function
+to a define, just as ISAAC is implemented. The results show
+almost no improvement so it is left as it is.
+
+
 2013-03-12
 ----------
 
