@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <time.h>
 #include <math.h>
 
@@ -90,6 +91,21 @@ int main(int argc, const char *argv[])
 
     printf("| Parisi-Rapuano:      %.4lf ± %.4lf |\n",mean/1e9, sqrt(var)/1e9);
 #endif
+
+    srand(time(NULL));
+    for(j = 0; j < 10; j++)
+    {
+        clock_gettime(CLOCK_MONOTONIC,&tp1);
+        for(i = 0; i < 10000000; i++)
+            rand();
+        clock_gettime(CLOCK_MONOTONIC,&tp2);
+        elapsed_time = (unsigned long) (tp2.tv_sec-tp1.tv_sec)*1000000000 + \
+                       (unsigned long) tp2.tv_nsec-tp1.tv_nsec;
+        times[j] = elapsed_time;
+    }
+    calc_mean_var(&mean,&var,times);
+
+    printf("| Rand (stdlib):       %.4lf ± %.4lf |\n",mean/1e9, sqrt(var)/1e9);
 
 #if WELL_RAND || RANDS_USE_ALL
     well_srand(time(NULL));
@@ -199,6 +215,21 @@ int main(int argc, const char *argv[])
 
     printf("| Parisi-Rapuano:      %.4lf ± %.4lf |\n",mean/1e9, sqrt(var)/1e9);
 #endif
+
+    srand(time(NULL));
+    for(j = 0; j < 10; j++)
+    {
+        clock_gettime(CLOCK_MONOTONIC,&tp1);
+        for(i = 0; i < 20000000; i++)
+            rand();
+        clock_gettime(CLOCK_MONOTONIC,&tp2);
+        elapsed_time = (unsigned long) (tp2.tv_sec-tp1.tv_sec)*1000000000 + \
+                       (unsigned long) tp2.tv_nsec-tp1.tv_nsec;
+        times[j] = elapsed_time;
+    }
+    calc_mean_var(&mean,&var,times);
+
+    printf("| Rand (stdlib):       %.4lf ± %.4lf |\n",mean/1e9, sqrt(var)/1e9);
 
 #if WELL_RAND || RANDS_USE_ALL
     well_srand(time(NULL));

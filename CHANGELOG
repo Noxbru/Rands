@@ -1,3 +1,10 @@
+2013-05-23
+----------
+
+Added `rand` from stdlib to the speed-test.
+Just for comparison with the others.
+
+
 2013-04-26
 ----------
 
