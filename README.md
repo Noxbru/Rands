@@ -109,6 +109,11 @@ choose if you want to have all the generators, and if not
 which ones to have. And you can also choose whether you
 want to be able to use states or not.
 
+There's also an option to choose a preferred generator, this has to be
+the function that generates the random numbers. This preferred generator
+will be used in the future to produce numbers from distribution
+and in some tests.
+
 ## Issues list
 Here I will write down all the things of the library I think
 are issues and need to be repaired, or at least noticed.
