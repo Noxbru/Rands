@@ -136,4 +136,25 @@ unsigned long int well_x64_rand_st(well_x64_state *st);
 
 #endif // WELL_X64_RAND
 
+#if XOR_RAND || RANDS_USE_ALL
+
+typedef struct _xor_state 
+{
+    unsigned int wheel[4];
+} xor_state;
+
+extern xor_state xor_default_state;
+
+void xor_srand(unsigned long int seed);
+unsigned int xor_rand();
+
+#if RANDS_USE_STATES
+void xor_init_st(xor_state **st);
+void xor_clear_st(xor_state *st);
+void xor_srand_st(xor_state *st, unsigned long int seed);
+unsigned int xor_rand_st(xor_state *st);
+#endif
+
+#endif // XOR_RAND
+
 #endif
