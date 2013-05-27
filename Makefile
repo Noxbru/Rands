@@ -17,8 +17,8 @@ LIB_RANDS_FINAL = librands.a
 all: rands
 
 rands: $(OBJ_RANDS)
-		ld -r $(OBJ_RANDS) -o $(OBJ_RANDS_FINAL)
-		ar rcs $(LIB_RANDS_FINAL) $(OBJ_RANDS)
+	ld -r $(OBJ_RANDS) -o $(OBJ_RANDS_FINAL)
+	ar rcs $(LIB_RANDS_FINAL) $(OBJ_RANDS)
 
 isaac.o: isaac.c
 isaac_x64.o: isaac_x64.c
@@ -34,5 +34,5 @@ speed-test: rands speed.o
 speed.o: speed.c
 
 clean:
-		@rm *.o
-		@rm $(LIB_RANDS_FINAL)
+	@rm *.o
+	@rm $(LIB_RANDS_FINAL)
