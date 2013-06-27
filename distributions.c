@@ -57,7 +57,7 @@ double chi2(unsigned int n)
     unsigned int i;
     double x;
 
-    x=0;
+    x=1;
     for(i = 0; i < n/2; i++)
         x*=(double)RANDS_PREFERRED()/UINT_MAX;
 
