@@ -72,3 +72,33 @@ double chi2(unsigned int n)
     else
         return x;
 }
+
+unsigned int binomial(double p, unsigned int n)
+{
+    unsigned int i;
+    unsigned int x;
+
+    x=0;
+    for(i = 0; i < n; i++)
+    {
+        if(((double)RANDS_PREFERRED()/UINT_MAX)<p)
+            x++;
+    }
+
+    return x;
+}
+
+unsigned int binomial_un(unsigned int p, unsigned int n)
+{
+    unsigned int i;
+    unsigned int x;
+
+    x=0;
+    for(i = 0; i < n; i++)
+    {
+        if(RANDS_PREFERRED()<p)
+            x++;
+    }
+
+    return x;
+}
