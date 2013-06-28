@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -O2 -march=native -flto
-ERROR_FLAGS = -Wall -Wextra -pedantic -std=gnu11
+ERROR_FLAGS = -Wall -Wextra -pedantic -std=gnu11 -fno-diagnostics-show-caret
 LDFLAGS = -lm -lrt
 
 CFLAGS += $(ERROR_FLAGS)
