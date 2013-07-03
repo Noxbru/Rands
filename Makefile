@@ -27,6 +27,13 @@ well.o: well.c
 well_x64.o: well_x64.c
 xorshift.o: xorshift.c
 
+distributions.o: distributions.c
+
+distributions-test: rands distributions.o distributions-test.o
+	$(CC) $(CFLAGS) distributions.o distributions-test.o -o distributions-test $(LDFLAGS) -lrands -L.
+
+distributions-test.o: distributions-test.c
+
 speed-test: rands speed.o
 	$(CC) $(CFLAGS) speed.o -o speed $(LDFLAGS) -lrands -L.
 	./speed
