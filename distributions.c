@@ -41,7 +41,7 @@ unsigned int poisson(double mean)
     double x;
 
     r=0;
-    x=(double)RANDS_PREFERRED()/UINT_MAX;
+    x=1;
 
     do
     {
