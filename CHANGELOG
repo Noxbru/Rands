@@ -1,3 +1,10 @@
+2013-07-10
+----------
+
+Added the SSE version of parisi-rapuano
+generator. This needs at least SSE2
+
+
 2013-07-04
 ----------
 

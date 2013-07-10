@@ -5,6 +5,7 @@
 
 #include <stdlib.h>
 #include <limits.h>
+#include <x86intrin.h>
 
 #if ISAAC_RAND || RANDS_USE_ALL
 
@@ -91,6 +92,37 @@ unsigned int pr_rand_st(pr_state *st);
 #endif
 
 #endif // PR_RAND
+
+#if __SSE2__
+#if PR_SSE_RAND || RANDS_USE_ALL
+    
+typedef struct _pr_sse_state
+{
+    unsigned int wheel[256];
+    unsigned int wheel2[256];
+    unsigned char index;
+} pr_sse_state;
+
+extern pr_sse_state pr_sse_default_state;
+
+void pr_sse_srand(unsigned long int seed);
+void pr_sse_calc();
+#define pr_sse_rand() \
+    (pr_sse_default_state.index? pr_sse_default_state.wheel2[pr_sse_default_state.index++] : \
+                 (pr_sse_calc(), pr_sse_default_state.wheel2[pr_sse_default_state.index++]))
+
+#if RANDS_USE_STATES
+void pr_sse_init_st(pr_sse_state **st);
+void pr_sse_clear_st(pr_sse_state *st);
+void pr_sse_srand_st(pr_sse_state *st, unsigned long int seed);
+unsigned int pr_calc_st(pr_sse_state *st);
+#define pr_sse_rand_st(st) \
+    (st->index? st.wheel2[st->index++] : \
+               (pr_sse_calc_st(st), st->wheel2[st->index++]))
+#endif
+
+#endif // PR_SSE_RAND
+#endif
 
 #if WELL_RAND || RANDS_USE_ALL
 
