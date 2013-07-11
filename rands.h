@@ -115,7 +115,7 @@ void pr_sse_calc();
 void pr_sse_init_st(pr_sse_state **st);
 void pr_sse_clear_st(pr_sse_state *st);
 void pr_sse_srand_st(pr_sse_state *st, unsigned long int seed);
-unsigned int pr_calc_st(pr_sse_state *st);
+void pr_sse_calc_st(pr_sse_state *st);
 #define pr_sse_rand_st(st) \
     (st->index? st.wheel2[st->index++] : \
                (pr_sse_calc_st(st), st->wheel2[st->index++]))
