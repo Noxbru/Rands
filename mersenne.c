@@ -4,6 +4,7 @@
 #if MT_RAND || RANDS_USE_ALL
     
 mt_state mt_default_state;
+static unsigned int mt_magic[2] = {0,0x9908b0df};
 
 void mt_srand(unsigned long int seed)
 {
@@ -17,14 +18,27 @@ void mt_srand(unsigned long int seed)
 void mt_calc()
 {
     unsigned int i,y;
-    static unsigned int mt_magic[2] = {0,0x9908b0df};
+
+    for(i = 0; i < 227; i++)
+    {
+        y = (mt_default_state.wheel[i] & 0x80000000) | \
+            (mt_default_state.wheel[i+1] & 0x7fffffff);
+        mt_default_state.wheel[i] = mt_default_state.wheel[i+397] ^ (y>>1) ^ mt_magic[y&1];
+    }
+    
+    for(; i < 623; i++)
+    {
+        y = (mt_default_state.wheel[i] & 0x80000000) | \
+            (mt_default_state.wheel[i+1] & 0x7fffffff);
+        mt_default_state.wheel[i] = mt_default_state.wheel[i-227] ^ (y>>1) ^ mt_magic[y&1];
+    }
+
+    y = (mt_default_state.wheel[623] & 0x80000000) | \
+        (mt_default_state.wheel[0] & 0x7fffffff);
+    mt_default_state.wheel[623] = mt_default_state.wheel[296] ^ (y>>1) ^ mt_magic[y&1];
 
     for(i = 0; i < 624; i++)
     {
-        y = (mt_default_state.wheel[i] & 0x80000000) | \
-            (mt_default_state.wheel[(i+1)%624] & 0x7fffffff);
-        mt_default_state.wheel[i] = mt_default_state.wheel[(i+397)%624] ^ (y>>1) ^ mt_magic[y&1];
-
         y = mt_default_state.wheel[i];
         y^= (y>>11);
         y^= ((y<<7)&0x9d2c5680);
@@ -32,6 +46,7 @@ void mt_calc()
         y^= (y>>18);
         mt_default_state.wheel2[i] = y;
     }
+
     mt_default_state.index = 0;
 }
 
@@ -68,14 +83,27 @@ void mt_srand_st(mt_state *st, unsigned long int seed)
 void mt_calc_st(mt_state *st)
 {
     unsigned int i,y;
-    static unsigned int mt_magic[2] = {0,0x9908b0df};
+
+    for(i = 0; i < 227; i++)
+    {
+        y = (st->wheel[i] & 0x80000000) | \
+            (st->wheel[i+1] & 0x7fffffff);
+        st->wheel[i] = st->wheel[i+397] ^ (y>>1) ^ mt_magic[y&1];
+    }
+
+    for(; i < 623; i++)
+    {
+        y = (st->wheel[i] & 0x80000000) | \
+            (st->wheel[i+1] & 0x7fffffff);
+        st->wheel[i] = st->wheel[i-227] ^ (y>>1) ^ mt_magic[y&1];
+    }
+
+    y = (st->wheel[623] & 0x80000000) | \
+        (st->wheel[0] & 0x7fffffff);
+    st->wheel[623] = st->wheel[296] ^ (y>>1) ^ mt_magic[y&1];
 
     for(i = 0; i < 624; i++)
     {
-        y = (st->wheel[i] & 0x80000000) | \
-            (st->wheel[(i+1)%624] & 0x7fffffff);
-        st->wheel[i] = st->wheel[(i+397)%624] ^ (y>>1) ^ mt_magic[y&1];
-
         y = st->wheel[i];
         y^= (y>>11);
         y^= ((y<<7)&0x9d2c5680);
