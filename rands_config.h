@@ -13,6 +13,8 @@
 
 #endif
 
+#define STDLIB_RAND_TEST 1
+
 #define RANDS_USE_STATES 1
 
 #define RANDS_PREFERRED() pr_rand()
