@@ -33,6 +33,9 @@ there will be (I hope) more information about how they work.
 * Parisi-Rapuano
     * Type: Lagged Fibonacci Generator
     * Period: Unknown (although should be near to (2⁵⁵-1)·32)
+* Mersene Twister
+    * Type: Twisted Generalised Feedback Shift Register
+    * Period: 2¹⁹⁹³⁷-1
 * Well
     * Type: Twisted Generalised Feedback Shift Register
     * Period: 2⁵¹²-1

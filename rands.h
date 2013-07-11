@@ -124,6 +124,31 @@ unsigned int pr_calc_st(pr_sse_state *st);
 #endif // PR_SSE_RAND
 #endif
 
+#if MT_RAND || RANDS_USE_ALL
+    
+typedef struct _mt_state 
+{
+    unsigned int wheel[624];
+    unsigned int wheel2[624];
+    unsigned int index;
+} mt_state;
+
+extern mt_state mt_default_state;
+
+void mt_srand(unsigned long int seed);
+void mt_calc();
+unsigned int mt_rand();
+
+#if RANDS_USE_STATES
+void mt_init_st(mt_state **st);
+void mt_clear_st(mt_state *st);
+void mt_srand_st(mt_state *st, unsigned long int seed);
+void mt_calc_st(mt_state *st);
+unsigned int mt_rand_st(mt_state *st);
+#endif
+
+#endif // MT_RAND
+
 #if WELL_RAND || RANDS_USE_ALL
 
 typedef struct _well_state 
