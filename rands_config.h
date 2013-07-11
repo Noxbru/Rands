@@ -6,6 +6,7 @@
 #define ISAAC_X64_RAND  1
 #define PR_RAND         1
 #define PR_SSE_RAND     1 // Needs sse2 at least
+#define MT_RAND         1
 #define WELL_RAND       1
 #define WELL_X64_RAND   1
 #define XOR_RAND        1

@@ -3,7 +3,7 @@ TODO LIST
 
 * Generators to add
 -[X] ISAAC
--[ ] Mersenne Twister
+-[X] Mersenne Twister
 -[X] Parisi-Rapuano
 -[X] WELL
 -[X] Xorshift

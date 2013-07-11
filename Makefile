@@ -9,6 +9,7 @@ OBJ_RANDS = isaac.o	    \
 			isaac_x64.o \
 			parisi.o    \
 			parisi_sse.o\
+			mersenne.o  \
 			well.o      \
 			well_x64.o  \
 			xorshift.o
@@ -25,6 +26,7 @@ isaac.o: isaac.c
 isaac_x64.o: isaac_x64.c
 parisi.o: parisi.c
 parisi_sse.o: parisi_sse.c
+mersenne.o: mersenne.c
 well.o: well.c
 well_x64.o: well_x64.c
 xorshift.o: xorshift.c
