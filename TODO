@@ -3,7 +3,7 @@ TODO LIST
 
 * Generators to add
 -[X] ISAAC
--[ ] Mersenne Twister
+-[X] Mersenne Twister
 -[X] Parisi-Rapuano
 -[X] WELL
 -[X] Xorshift
@@ -26,6 +26,7 @@ TODO LIST
         - Some don't, for theese I will have to study a
             way to pass a generator so the function can
             produce all the numbers it needs.
+-[ ] Investigate a better way to have a preferred generator
 -[ ] Investigate the possibility of adding
         'Quasi-random Sequences' or also called
         'low-discrepancy Sequences'

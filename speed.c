@@ -92,6 +92,25 @@ int main(int argc, const char *argv[])
     printf("| Parisi-Rapuano:      %.4lf ± %.4lf |\n",mean/1e9, sqrt(var)/1e9);
 #endif
 
+#if __SSE2__
+#if PR_SSE_RAND || RANDS_USE_ALL
+    pr_sse_srand(time(NULL));
+    for(j = 0; j < 10; j++)
+    {
+        clock_gettime(CLOCK_MONOTONIC,&tp1);
+        for(i = 0; i < 10000000; i++)
+            pr_sse_rand();
+        clock_gettime(CLOCK_MONOTONIC,&tp2);
+        elapsed_time = (unsigned long) (tp2.tv_sec-tp1.tv_sec)*1000000000 + \
+                       (unsigned long) tp2.tv_nsec-tp1.tv_nsec;
+        times[j] = elapsed_time;
+    }
+    calc_mean_var(&mean,&var,times);
+
+    printf("| Parisi-Rapuano SSE:  %.4lf ± %.4lf |\n",mean/1e9, sqrt(var)/1e9);
+#endif
+#endif
+
     srand(time(NULL));
     for(j = 0; j < 10; j++)
     {
@@ -106,6 +125,23 @@ int main(int argc, const char *argv[])
     calc_mean_var(&mean,&var,times);
 
     printf("| Rand (stdlib):       %.4lf ± %.4lf |\n",mean/1e9, sqrt(var)/1e9);
+
+#if MT_RAND || RANDS_USE_ALL
+    mt_srand(time(NULL));
+    for(j = 0; j < 10; j++)
+    {
+        clock_gettime(CLOCK_MONOTONIC,&tp1);
+        for(i = 0; i < 10000000; i++)
+            mt_rand();
+        clock_gettime(CLOCK_MONOTONIC,&tp2);
+        elapsed_time = (unsigned long) (tp2.tv_sec-tp1.tv_sec)*1000000000 + \
+                       (unsigned long) tp2.tv_nsec-tp1.tv_nsec;
+        times[j] = elapsed_time;
+    }
+    calc_mean_var(&mean,&var,times);
+
+    printf("| Mersenne Twister:    %.4lf ± %.4lf |\n",mean/1e9, sqrt(var)/1e9);
+#endif
 
 #if WELL_RAND || RANDS_USE_ALL
     well_srand(time(NULL));
@@ -216,6 +252,25 @@ int main(int argc, const char *argv[])
     printf("| Parisi-Rapuano:      %.4lf ± %.4lf |\n",mean/1e9, sqrt(var)/1e9);
 #endif
 
+#if __SSE2__
+#if PR_SSE_RAND || RANDS_USE_ALL
+    pr_sse_srand(time(NULL));
+    for(j = 0; j < 10; j++)
+    {
+        clock_gettime(CLOCK_MONOTONIC,&tp1);
+        for(i = 0; i < 20000000; i++)
+            pr_sse_rand();
+        clock_gettime(CLOCK_MONOTONIC,&tp2);
+        elapsed_time = (unsigned long) (tp2.tv_sec-tp1.tv_sec)*1000000000 + \
+                       (unsigned long) tp2.tv_nsec-tp1.tv_nsec;
+        times[j] = elapsed_time;
+    }
+    calc_mean_var(&mean,&var,times);
+
+    printf("| Parisi-Rapuano SSE:  %.4lf ± %.4lf |\n",mean/1e9, sqrt(var)/1e9);
+#endif
+#endif
+
     srand(time(NULL));
     for(j = 0; j < 10; j++)
     {
@@ -230,6 +285,23 @@ int main(int argc, const char *argv[])
     calc_mean_var(&mean,&var,times);
 
     printf("| Rand (stdlib):       %.4lf ± %.4lf |\n",mean/1e9, sqrt(var)/1e9);
+
+#if MT_RAND || RANDS_USE_ALL
+    mt_srand(time(NULL));
+    for(j = 0; j < 10; j++)
+    {
+        clock_gettime(CLOCK_MONOTONIC,&tp1);
+        for(i = 0; i < 20000000; i++)
+            mt_rand();
+        clock_gettime(CLOCK_MONOTONIC,&tp2);
+        elapsed_time = (unsigned long) (tp2.tv_sec-tp1.tv_sec)*1000000000 + \
+                       (unsigned long) tp2.tv_nsec-tp1.tv_nsec;
+        times[j] = elapsed_time;
+    }
+    calc_mean_var(&mean,&var,times);
+
+    printf("| Mersenne Twister:    %.4lf ± %.4lf |\n",mean/1e9, sqrt(var)/1e9);
+#endif
 
 #if WELL_RAND || RANDS_USE_ALL
     well_srand(time(NULL));
