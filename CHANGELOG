@@ -1,6 +1,9 @@
 2013-07-11
 ----------
 
+Bumped to version 0.6:
+5 generators + speed tests
+
 Added Mersenne Twister Generator
 
 
