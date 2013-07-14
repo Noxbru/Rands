@@ -35,7 +35,7 @@ void mt_calc()
 
     y = (mt_default_state.wheel[623] & 0x80000000) | \
         (mt_default_state.wheel[0] & 0x7fffffff);
-    mt_default_state.wheel[623] = mt_default_state.wheel[296] ^ (y>>1) ^ mt_magic[y&1];
+    mt_default_state.wheel[623] = mt_default_state.wheel[396] ^ (y>>1) ^ mt_magic[y&1];
 
     for(i = 0; i < 624; i++)
     {
@@ -50,7 +50,7 @@ void mt_calc()
     mt_default_state.index = 0;
 }
 
-unsigned int mt_rand()
+inline unsigned int mt_rand()
 {
     unsigned int r;
     if(!mt_default_state.index)
@@ -100,7 +100,7 @@ void mt_calc_st(mt_state *st)
 
     y = (st->wheel[623] & 0x80000000) | \
         (st->wheel[0] & 0x7fffffff);
-    st->wheel[623] = st->wheel[296] ^ (y>>1) ^ mt_magic[y&1];
+    st->wheel[623] = st->wheel[396] ^ (y>>1) ^ mt_magic[y&1];
 
     for(i = 0; i < 624; i++)
     {
@@ -114,7 +114,7 @@ void mt_calc_st(mt_state *st)
     st->index = 0;
 }
 
-unsigned int mt_rand_st(mt_state *st)
+inline unsigned int mt_rand_st(mt_state *st)
 {
     unsigned int r;
     if(!st->index)
