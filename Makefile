@@ -1,7 +1,16 @@
 CC = gcc
 CFLAGS = -O2 -march=native -flto
-ERROR_FLAGS = -Wall -Wextra -pedantic -std=gnu11 -fno-diagnostics-show-caret
+ERROR_FLAGS = -Wall -Wextra -pedantic -std=gnu11
 LDFLAGS = -lm -lrt
+
+ifeq ($(CC),gcc)
+	GCC_VERSION = $(shell gcc -dumpversion | sed 's/\.//g')
+	GCC_GT_480  = $(shell expr $(GCC_VERSION) \>= 480)
+
+	ifeq ($(GCC_GT_480),1)
+		ERROR_FLAGS += -fno-diagnostics-show-caret
+	endif
+endif
 
 CFLAGS += $(ERROR_FLAGS)
 
