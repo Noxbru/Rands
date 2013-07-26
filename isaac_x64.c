@@ -98,25 +98,25 @@ void isaac_x64_calc_st(isaac_x64_state *st)
     for(i = 0; i < 256; i++)
     {
         x = st->wheel[i];
-        a = (a^(a<<13)) + st->wheel[(i+128)%256];
+        a = ~(a^(a<<21)) + st->wheel[(i+128)%256];
         st->wheel[i]= y = a+b+st->wheel[(x>>2)%256];
         st->wheel2[i]=b = x + st->wheel[(y>>10)%256];
         i++;
 
         x = st->wheel[i];
-        a = (a^(a>>6)) + st->wheel[(i+128)%256];
+        a = (a^(a>>5)) + st->wheel[(i+128)%256];
         st->wheel[i]= y = a+b+st->wheel[(x>>2)%256];
         st->wheel2[i]=b = x + st->wheel[(y>>10)%256];
         i++;
 
         x=st->wheel[i];
-        a= (a^(a<<2)) + st->wheel[(i+128)%256];
+        a= (a^(a<<12)) + st->wheel[(i+128)%256];
         st->wheel[i]= y = a+b+st->wheel[(x>>2)%256];
         st->wheel2[i]=b = x + st->wheel[(y>>10)%256];
         i++;
 
         x=st->wheel[i];
-        a= (a^(a>>16)) + st->wheel[(i+128)%256];
+        a= (a^(a>>33)) + st->wheel[(i+128)%256];
         st->wheel[i]= y = a+b+st->wheel[(x>>2)%256];
         st->wheel2[i]=b = x + st->wheel[(y>>10)%256];
     }
