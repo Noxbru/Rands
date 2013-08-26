@@ -27,17 +27,17 @@ unsigned int xor_rand()
 {
     unsigned int t=xor_default_state.wheel[0]^(xor_default_state.wheel[0]<<11);
     unsigned int a=xor_default_state.wheel[3]^(xor_default_state.wheel[3]>>19);
-//if __SSE2__
-    /*
-     *__m128i b = _mm_load_si128((__m128i *) xor_default_state.wheel);
-     *b = _mm_srli_si128(b,4);
-     *_mm_store_si128((__m128i *) xor_default_state.wheel,b);
-     */
-//#else
+/*
+ *#if __SSE2__
+ *    __m128i b = _mm_load_si128((__m128i *) xor_default_state.wheel);
+ *    b = _mm_srli_si128(b,4);
+ *    _mm_store_si128((__m128i *) xor_default_state.wheel,b);
+ *#else
+ */
     xor_default_state.wheel[0]=xor_default_state.wheel[1];
     xor_default_state.wheel[1]=xor_default_state.wheel[2];
     xor_default_state.wheel[2]=xor_default_state.wheel[3];
-//#endif
+/*#endif*/
     xor_default_state.wheel[3]=a ^ (t^(t>>8));
     return xor_default_state.wheel[3];
 }
