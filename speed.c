@@ -59,7 +59,7 @@ int main(int argc, const char *argv[])
 #endif
 
 #if ISAAC_X64_RAND || RANDS_USE_ALL
-    isaac_srand(time(NULL));
+    isaac_x64_srand(time(NULL));
     for(j = 0; j < 10; j++)
     {
         clock_gettime(CLOCK_MONOTONIC,&tp1);
@@ -221,7 +221,7 @@ int main(int argc, const char *argv[])
 #endif
 
 #if ISAAC_X64_RAND || RANDS_USE_ALL
-    isaac_srand(time(NULL));
+    isaac_x64_srand(time(NULL));
     for(j = 0; j < 10; j++)
     {
         clock_gettime(CLOCK_MONOTONIC,&tp1);
