@@ -19,7 +19,9 @@ static const unsigned int mt_magic[2] = {0,0x9908b0df};
 #ifdef __SSE2__
 static const __m128i mt_sse_magic = {0x9908b0df9908b0df,0x9908b0df9908b0df};
 static const __m128i mask_00 = {0,0};
+#ifndef __SSE4_1__
 static const __m128i mask_01 = {0x0000000100000001,0x0000000100000001};
+#endif
 static const __m128i mask_7f = {0x7fffffff7fffffff,0x7fffffff7fffffff};
 static const __m128i mask_80 = {0x8000000080000000,0x8000000080000000};
 static const __m128i mask_b  = {0x9d2c56809d2c5680,0x9d2c56809d2c5680};
@@ -74,9 +76,14 @@ void mt_calc()
 
         a = _mm_loadu_si128((__m128i *) &mt_default_state.wheel[i+397]);                        // wheel+397
         b = _mm_srli_epi32(y,1);                                                                // y >> 1
+#ifndef __SSE4_1__
         mask_magic = _mm_and_si128(y,mask_01);                                                  // y & 1
         mask_magic = _mm_cmplt_epi32(mask_00, mask_magic);
         magic = _mm_and_si128(mt_sse_magic, mask_magic);
+#else
+        mask_magic = _mm_slli_epi32(y,31);
+        *((__m128 *) &magic) = _mm_blendv_ps(*((__m128 *) &mask_00),*((__m128 *) &mt_sse_magic),*((__m128 *) &mask_magic));
+#endif
 
         y = _mm_xor_si128(a,b);                                                                 // wheel+397 ^ y >> 1
         y = _mm_xor_si128(y,magic);                                                             //
@@ -104,9 +111,14 @@ void mt_calc()
 
         a = _mm_loadu_si128((__m128i *) &mt_default_state.wheel[i-227]);                        // wheel+397
         b = _mm_srli_epi32(y,1);                                                                // y >> 1
+#ifndef __SSE4_1__
         mask_magic = _mm_and_si128(y,mask_01);                                                  // y & 1
         mask_magic = _mm_cmplt_epi32(mask_00,mask_magic);
         magic = _mm_and_si128(mt_sse_magic, mask_magic);
+#else
+        mask_magic = _mm_slli_epi32(y,31);
+        *((__m128 *) &magic) = _mm_blendv_ps(*((__m128 *) &mask_00),*((__m128 *) &mt_sse_magic),*((__m128 *) &mask_magic));
+#endif
 
         y = _mm_xor_si128(a,b);                                                                 // wheel+397 ^ y >> 1
         y = _mm_xor_si128(y,magic);                                                             //
@@ -220,9 +232,14 @@ void mt_calc_st(mt_state *st)
 
         a = _mm_loadu_si128((__m128i *) &st->wheel[i+397]);
         b = _mm_srli_epi32(y,1);
+#ifndef __SSE4_1__
         mask_magic = _mm_and_si128(y,mask_01);
         mask_magic = _mm_cmplt_epi32(mask_00, mask_magic);
         magic = _mm_and_si128(mt_sse_magic, mask_magic);
+#else
+        mask_magic = _mm_slli_epi32(y,31);
+        *((__m128 *) &magic) = _mm_blendv_ps(*((__m128 *) &mask_00),*((__m128 *) &mt_sse_magic),*((__m128 *) &mask_magic));
+#endif
 
         y = _mm_xor_si128(a,b);
         y = _mm_xor_si128(y,magic);
@@ -250,9 +267,14 @@ void mt_calc_st(mt_state *st)
 
         a = _mm_loadu_si128((__m128i *) &st->wheel[i-227]);
         b = _mm_srli_epi32(y,1);
+#ifndef __SSE4_1__
         mask_magic = _mm_and_si128(y,mask_01);
         mask_magic = _mm_cmplt_epi32(mask_00,mask_magic);
         magic = _mm_and_si128(mt_sse_magic, mask_magic);
+#else
+        mask_magic = _mm_slli_epi32(y,31);
+        *((__m128 *) &magic) = _mm_blendv_ps(*((__m128 *) &mask_00),*((__m128 *) &mt_sse_magic),*((__m128 *) &mask_magic));
+#endif
 
         y = _mm_xor_si128(a,b);
         y = _mm_xor_si128(y,magic);
