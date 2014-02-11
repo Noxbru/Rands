@@ -18,7 +18,7 @@ TODO LIST
 
 * General things to do:
 -[ ] Decide and add a license
--[ ] Investigate a way to 'portably' use 32 and 64 bits
+-[X] Investigate a way to 'portably' use 32 and 64 bits
         numbers.
 -[ ] Write a little 'extra' to generate numbers according
         to a distribution. This has some problems:

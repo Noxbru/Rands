@@ -7,14 +7,13 @@
  *  - 88675123
  */
 
-#include <stdlib.h>
 #include "rands.h"
 
 #if XOR_RAND || RANDS_USE_ALL
 
 xor_state xor_default_state;
 
-void xor_srand(unsigned long int seed)
+void xor_srand(unsigned int seed)
 {
     srand(seed);
     xor_default_state.wheel[0]=rand();
@@ -23,10 +22,10 @@ void xor_srand(unsigned long int seed)
     xor_default_state.wheel[3]=rand();
 }
 
-unsigned int xor_rand()
+uint32_t xor_rand()
 {
-    unsigned int t=xor_default_state.wheel[0]^(xor_default_state.wheel[0]<<11);
-    unsigned int a=xor_default_state.wheel[3]^(xor_default_state.wheel[3]>>19);
+    uint32_t t=xor_default_state.wheel[0]^(xor_default_state.wheel[0]<<11);
+    uint32_t a=xor_default_state.wheel[3]^(xor_default_state.wheel[3]>>19);
 /*
  *#if __SSE2__
  *    __m128i b = _mm_load_si128((__m128i *) xor_default_state.wheel);
@@ -53,7 +52,7 @@ inline void xor_clear_st(xor_state *st)
     free(st);
 }
 
-void xor_srand_st(xor_state *st, unsigned long int seed)
+void xor_srand_st(xor_state *st, unsigned int seed)
 {
     srand(seed);
     st->wheel[0]=rand();
@@ -62,10 +61,10 @@ void xor_srand_st(xor_state *st, unsigned long int seed)
     st->wheel[3]=rand();
 }
 
-unsigned int xor_rand_st(xor_state *st)
+uint32_t xor_rand_st(xor_state *st)
 {
-    unsigned int t=st->wheel[0]^(st->wheel[0]<<11);
-    unsigned int a=st->wheel[3]^(st->wheel[3]>>19);
+    uint32_t t=st->wheel[0]^(st->wheel[0]<<11);
+    uint32_t a=st->wheel[3]^(st->wheel[3]>>19);
     st->wheel[0]=st->wheel[1];
     st->wheel[1]=st->wheel[2];
     st->wheel[2]=st->wheel[3];

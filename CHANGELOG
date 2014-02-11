@@ -1,3 +1,10 @@
+2014-02-11
+----------
+
+Changed unsigned int to uint32_t and unsigned long int
+to uint64_t so we are more portable
+
+
 2013-07-11
 ----------
 

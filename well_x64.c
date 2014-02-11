@@ -1,14 +1,13 @@
-#include <stdlib.h>
 #include "rands.h"
 
 #if WELL_X64_RAND || RANDS_USE_ALL
 
 well_x64_state well_x64_default_state;
 
-void well_x64_srand(unsigned long seed)
+void well_x64_srand(unsigned int seed)
 {
     unsigned char i;
-    unsigned long int r;
+    uint64_t r;
 
     srand(seed);
     for(i = 0; i < 16; i++)
@@ -20,9 +19,9 @@ void well_x64_srand(unsigned long seed)
     well_x64_default_state.index=0;
 }
 
-unsigned long int well_x64_rand()
+uint64_t well_x64_rand()
 {
-    unsigned long int a,b,c,d;
+    uint64_t a,b,c,d;
     a=well_x64_default_state.wheel[well_x64_default_state.index];
     b=well_x64_default_state.wheel[(well_x64_default_state.index+13)&15];
     c=well_x64_default_state.wheel[(well_x64_default_state.index+9)&15];
@@ -50,10 +49,10 @@ inline void well_x64_clear_st(well_x64_state *st)
     free(st);
 }
 
-void well_x64_srand_st(well_x64_state *st, unsigned long seed)
+void well_x64_srand_st(well_x64_state *st, unsigned int seed)
 {
     unsigned char i;
-    unsigned long int r;
+    uint64_t r;
 
     srand(seed);
     for(i = 0; i < 16; i++)
@@ -65,9 +64,9 @@ void well_x64_srand_st(well_x64_state *st, unsigned long seed)
     st->index=0;
 }
 
-unsigned long int well_x64_rand_st(well_x64_state *st)
+uint64_t well_x64_rand_st(well_x64_state *st)
 {
-    unsigned long int a,b,c,d;
+    uint64_t a,b,c,d;
     a=st->wheel[st->index];
     b=st->wheel[(st->index+13)&15];
     c=st->wheel[(st->index+9)&15];

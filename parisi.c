@@ -13,14 +13,13 @@
  * 4096 (256*16)
  */
 
-#include <stdlib.h>
 #include "rands.h"
 
 #if PR_RAND || RANDS_USE_ALL
 
 pr_state pr_default_state;
 
-void pr_srand(unsigned long int seed)
+void pr_srand(unsigned int seed)
 {
     srand(seed);
     unsigned char i;
@@ -31,9 +30,9 @@ void pr_srand(unsigned long int seed)
 }
 
 /* devuelve un número entre 0 y UINT_MAX */
-unsigned int pr_rand()
+uint32_t pr_rand()
 {
-    unsigned int r;
+    uint32_t r;
 
     //Chorradas para sacar el numerito que queremos
     pr_default_state.wheel[pr_default_state.index]=pr_default_state.wheel[(unsigned char)(pr_default_state.index-24)]+ \
@@ -54,7 +53,7 @@ inline void pr_clear_st(pr_state *st)
     free(st);
 }
 
-void pr_srand_st(pr_state *st, unsigned long int seed)
+void pr_srand_st(pr_state *st, unsigned int seed)
 {
     srand(seed);
     unsigned char i;
@@ -64,9 +63,9 @@ void pr_srand_st(pr_state *st, unsigned long int seed)
     st->wheel[255]=rand();
 }
 
-unsigned int pr_rand_st(pr_state *st)
+uint32_t pr_rand_st(pr_state *st)
 {
-    unsigned int r;
+    uint32_t r;
 
     //Chorradas para sacar el numerito que queremos
     st->wheel[st->index]=st->wheel[(unsigned char)(st->index-24)]+ \

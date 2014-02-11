@@ -1,4 +1,3 @@
-#include <stdlib.h>
 #include "rands.h"
 
 #if __SSE2__
@@ -6,7 +5,7 @@
 
 pr_sse_state pr_sse_default_state;
 
-void pr_sse_srand(unsigned long int seed)
+void pr_sse_srand(unsigned int seed)
 {
     srand(seed);
     unsigned char i;
@@ -86,7 +85,7 @@ inline void pr_sse_clear_st(pr_sse_state *st)
     free(st);
 }
 
-void pr_sse_srand_st(pr_sse_state *st, unsigned long int seed)
+void pr_sse_srand_st(pr_sse_state *st, unsigned int seed)
 {
     srand(seed);
     unsigned char i;

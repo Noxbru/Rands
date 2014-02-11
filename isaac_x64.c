@@ -1,14 +1,13 @@
-#include <stdlib.h>
 #include "rands.h"
 
 #if ISAAC_X64_RAND || RANDS_USE_ALL
 
 isaac_x64_state isaac_x64_default_state;
 
-void isaac_x64_srand(unsigned long int seed)
+void isaac_x64_srand(unsigned int seed)
 {
     unsigned int i;
-    unsigned long int r;
+    uint64_t r;
     srand(seed);
     for(i = 0; i < 256; i++)
     {
@@ -24,8 +23,8 @@ void isaac_x64_srand(unsigned long int seed)
 void isaac_x64_calc()
 {
     unsigned int i;
-    unsigned long int x,y;
-    unsigned long int a,b;
+    uint64_t x,y;
+    uint64_t a,b;
 
     isaac_x64_default_state.c++;
     a=isaac_x64_default_state.a;
@@ -70,10 +69,10 @@ inline void isaac_x64_clear_st(isaac_x64_state *st)
     free(st);
 }
 
-void isaac_x64_srand_st(isaac_x64_state *st, unsigned long int seed)
+void isaac_x64_srand_st(isaac_x64_state *st, unsigned int seed)
 {
     unsigned int i;
-    unsigned long int r;
+    uint64_t r;
     srand(seed);
     for(i = 0; i < 256; i++)
     {
@@ -89,8 +88,8 @@ void isaac_x64_srand_st(isaac_x64_state *st, unsigned long int seed)
 void isaac_x64_calc_st(isaac_x64_state *st)
 {
     unsigned int i;
-    unsigned long int x,y;
-    unsigned long int a,b;
+    uint64_t x,y;
+    uint64_t a,b;
 
     st->c++;
     a=st->a;

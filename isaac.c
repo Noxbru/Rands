@@ -1,11 +1,10 @@
-#include <stdlib.h>
 #include "rands.h"
 
 #if ISAAC_RAND || RANDS_USE_ALL
 
 isaac_state isaac_default_state;
 
-void isaac_srand(unsigned long int seed)
+void isaac_srand(unsigned int seed)
 {
     unsigned int i;
     srand(seed);
@@ -19,8 +18,9 @@ void isaac_srand(unsigned long int seed)
 
 void isaac_calc()
 {
-    unsigned int i,x,y;
-    unsigned int a,b;
+    unsigned int i;
+    uint32_t x,y;
+    uint32_t a,b;
 
     isaac_default_state.c++;
     a=isaac_default_state.a;
@@ -65,7 +65,7 @@ inline void isaac_clear_st(isaac_state *st)
     free(st);
 }
 
-void isaac_srand_st(isaac_state *st, unsigned long int seed)
+void isaac_srand_st(isaac_state *st, unsigned int seed)
 {
     unsigned int i;
     srand(seed);
@@ -79,8 +79,9 @@ void isaac_srand_st(isaac_state *st, unsigned long int seed)
 
 void isaac_calc_st(isaac_state *st)
 {
-    unsigned int i,x,y;
-    unsigned int a,b;
+    unsigned int i;
+    uint32_t x,y;
+    uint32_t a,b;
 
     st->c++;
     a=st->a;

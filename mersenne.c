@@ -5,7 +5,7 @@
     
 mt_state mt_default_state;
 
-void mt_srand(unsigned long int seed)
+void mt_srand(unsigned int seed)
 {
     unsigned int i;
     srand(seed);
@@ -14,7 +14,7 @@ void mt_srand(unsigned long int seed)
     mt_default_state.index=0;
 }
 
-static const unsigned int mt_magic[2] = {0,0x9908b0df};
+static const uint32_t mt_magic[2] = {0,0x9908b0df};
 
 #ifdef __SSE2__
 static const __m128i mt_sse_magic = {0x9908b0df9908b0df,0x9908b0df9908b0df};
@@ -31,7 +31,8 @@ static const __m128i mask_c  = {0xefc60000efc60000,0xefc60000efc60000};
 void mt_calc()
 {
 #ifndef __SSE2__
-    unsigned int i,y;
+    unsigned int i;
+    uint32_t y;
 
     for(i = 0; i < 227; i++)
     {
@@ -61,7 +62,8 @@ void mt_calc()
         mt_default_state.wheel2[i] = y;
     }
 #else
-    unsigned int i,z;
+    unsigned int i;
+    uint32_t z;
 
     __m128i y;
     __m128i a,b;
@@ -154,9 +156,9 @@ void mt_calc()
     mt_default_state.index = 0;
 }
 
-inline unsigned int mt_rand()
+inline uint32_t mt_rand()
 {
-    unsigned int r;
+    uint32_t r;
     if(!mt_default_state.index)
         mt_calc();
     r = mt_default_state.wheel2[mt_default_state.index];
@@ -175,7 +177,7 @@ inline void mt_clear_st(mt_state *st)
     free(st);
 }
 
-void mt_srand_st(mt_state *st, unsigned long int seed)
+void mt_srand_st(mt_state *st, unsigned int seed)
 {
     unsigned int i;
     srand(seed);
@@ -187,7 +189,8 @@ void mt_srand_st(mt_state *st, unsigned long int seed)
 void mt_calc_st(mt_state *st)
 {
 #ifndef __SSE2__
-    unsigned int i,y;
+    unsigned int i;
+    uint32_t y;
 
     for(i = 0; i < 227; i++)
     {
@@ -217,7 +220,8 @@ void mt_calc_st(mt_state *st)
         st->wheel2[i] = y;
     }
 #else
-    unsigned int i,z;
+    unsigned int i;
+    uint32_t z;
 
     __m128i y;
     __m128i a,b;
@@ -310,9 +314,9 @@ void mt_calc_st(mt_state *st)
     st->index = 0;
 }
 
-inline unsigned int mt_rand_st(mt_state *st)
+inline uint32_t mt_rand_st(mt_state *st)
 {
-    unsigned int r;
+    uint32_t r;
     if(!st->index)
         mt_calc_st(st);
     r = st->wheel2[st->index];

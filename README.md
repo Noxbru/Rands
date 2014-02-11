@@ -138,12 +138,6 @@ Not in any particular order:
   * The second is to rewrite the function to seed the states
     so it is thread-safe. This can be done by just embeding
     a 'one-line generator' in the seed function.
-* Support for 32 and 64-bits. Currently the library uses
-  `unsigned int` as the type for the numbers and the internal
-  states, which in my machine is 32-bits long, but changing
-  it to `unsigned long int` you should be able to produce
-  64-bits long numbers. Maybe I can make some kind of config
-  option to choose between them.
 * Things that I am sure I have forgotten =)
 
 The TODO list has been separated in its own file for clarity

@@ -43,7 +43,7 @@
  * L'Ecuyer and Makoto Matsumoto mainly does the
  * same but performs the ind-- as the last step
  * doing some more computations for getting z0
- * and the new state. We also return an unsigned int
+ * and the new state. We also return an uint32_t
  * instead of a double, so it's the user who can
  * choose what to do with the final number
  *
@@ -52,14 +52,13 @@
  */
 
 
-#include <stdlib.h>
 #include "rands.h"
 
 #if WELL_RAND || RANDS_USE_ALL
 
 well_state well_default_state;
 
-void well_srand(unsigned long seed)
+void well_srand(unsigned int seed)
 {
     unsigned char i;
 
@@ -70,9 +69,9 @@ void well_srand(unsigned long seed)
     well_default_state.index=0;
 }
 
-unsigned int well_rand()
+uint32_t well_rand()
 {
-    unsigned int a,b,c,d;
+    uint32_t a,b,c,d;
     a=well_default_state.wheel[well_default_state.index];
     b=well_default_state.wheel[(well_default_state.index+13)&15];
     c=well_default_state.wheel[(well_default_state.index+9)&15];
@@ -100,7 +99,7 @@ inline void well_clear_st(well_state *st)
     free(st);
 }
 
-void well_srand_st(well_state *st, unsigned long seed)
+void well_srand_st(well_state *st, unsigned int seed)
 {
     unsigned char i;
 
@@ -111,9 +110,9 @@ void well_srand_st(well_state *st, unsigned long seed)
     st->index=0;
 }
 
-unsigned int well_rand_st(well_state *st)
+uint32_t well_rand_st(well_state *st)
 {
-    unsigned int a,b,c,d;
+    uint32_t a,b,c,d;
     a=st->wheel[st->index];
     b=st->wheel[(st->index+13)&15];
     c=st->wheel[(st->index+9)&15];
