@@ -3,7 +3,7 @@
 #include <time.h>
 #include <math.h>
 
-#include "rands.h"
+#include "../src/rands.h"
 
 void calc_mean_var(double *mean, double *var, unsigned long int *data)
 {

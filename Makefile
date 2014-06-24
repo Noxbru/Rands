@@ -14,38 +14,51 @@ endif
 
 CFLAGS += $(ERROR_FLAGS)
 
-OBJ_RANDS = isaac.o	    \
-			isaac_x64.o \
-			parisi.o    \
-			parisi_sse.o\
-			mersenne.o  \
-			well.o      \
-			well_x64.o  \
-			xorshift.o
+OBJ_RANDS = src/isaac.o     \
+			src/isaac_x64.o \
+			src/parisi.o    \
+			src/parisi_sse.o\
+			src/mersenne.o  \
+			src/well.o      \
+			src/well_x64.o  \
+			src/xorshift.o
 OBJ_RANDS_FINAL = rands.o
+#SOBJ_RANDS_FINAL= librands.so
 LIB_RANDS_FINAL = librands.a
 
 all: rands
 
-rands: $(OBJ_RANDS)
+rands: $(OBJ_RANDS_FINAL) $(LIB_RANDS_FINAL)
+	@
+
+$(OBJ_RANDS_FINAL): $(OBJ_RANDS)
 	ld -r $(OBJ_RANDS) -o $(OBJ_RANDS_FINAL)
-	ar rcs $(LIB_RANDS_FINAL) $(OBJ_RANDS)
 
-isaac.o: isaac.c
-isaac_x64.o: isaac_x64.c
-parisi.o: parisi.c
-parisi_sse.o: parisi_sse.c
-mersenne.o: mersenne.c
-well.o: well.c
-well_x64.o: well_x64.c
-xorshift.o: xorshift.c
+#$(SOBJ_RANDS_FINAL): $(OBJ_RANDS)
+#$(CC) $(CFLAGS) -fPIC $(OBJ_RANDS) -o $(SOBJ_RANDS_FINAL) $(LDFLAGS) -shared
 
-speed-test: rands speed.o
-	$(CC) $(CFLAGS) speed.o -o speed $(LDFLAGS) -lrands -L.
-	./speed
+$(LIB_RANDS_FINAL): $(OBJ_RANDS)
+	gcc-ar rcs $(LIB_RANDS_FINAL) $(OBJ_RANDS)
 
-speed.o: speed.c
+src/isaac.o: 		src/isaac.c
+src/isaac_x64.o: 	src/isaac_x64.c
+src/parisi.o: 		src/parisi.c
+src/parisi_sse.o:	src/parisi_sse.c
+src/mersenne.o: 	src/mersenne.c
+src/well.o: 		src/well.c
+src/well_x64.o: 	src/well_x64.c
+src/xorshift.o: 	src/xorshift.c
+
+speed-test: rands tests/speed.o
+	$(CC) $(CFLAGS) tests/speed.o -o tests/speed $(LDFLAGS) -lrands -L.
+	./tests/speed
+
+speed.o: tests/speed.c
+
+
 
 clean:
-	@rm *.o
-	@rm $(LIB_RANDS_FINAL)
+	@rm -f $(OBJ_RANDS)
+	@rm -f $(OBJ_RANDS_FINAL)
+#@rm -f $(SOBJ_RANDS_FINAL)
+	@rm -f $(LIB_RANDS_FINAL)
